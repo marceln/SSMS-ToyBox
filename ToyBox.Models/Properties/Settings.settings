@@ -1,0 +1,32 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ToyBox.Models.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Query_ObjectLookup" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">USE [{0}]
+SELECT	Name AS ObjectName, 
+		'ASS' AS ObjectType, 
+		NULL AS SchemaName, 
+		Name AS FullyQualifiedName 
+FROM sys.assemblies A
+UNION ALL 
+SELECT	O.Name AS ObjectName, 
+		LTRIM(RTRIM(O.[type])) AS ObjectType, 
+		S.name AS SchemaName, 
+		S.name + '.' + O.name AS FullyQualifiedName
+FROM sys.objects O
+	WITH (NOLOCK)
+INNER JOIN sys.schemas S
+	WITH (NOLOCK)
+ON S.schema_id = O.schema_id
+WHERE type &lt;&gt; 'S' and type &lt;&gt; 'IT' </Value>
+    </Setting>
+    <Setting Name="Query_Databases" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SELECT	[D].[name] AS [Name],
+		[D].[database_id] AS [Id],
+		[D].[state_desc] AS [StateDescription]
+FROM [master].[sys].[databases] D
+WHERE [D].[name] NOT IN ('master', 'tempdb', 'model', 'msdb', 'sysdb') AND [D].[is_distributor] = 0</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
