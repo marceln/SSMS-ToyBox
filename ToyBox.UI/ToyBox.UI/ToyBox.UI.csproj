@@ -159,6 +159,7 @@
     </Compile>
     <None Include="packages.config" />
     <None Include="Resources\Database32.png" />
+    <None Include="ToyBox.UI.licenseheader" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\DatabaseServer32.png" />
